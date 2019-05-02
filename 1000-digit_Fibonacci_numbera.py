@@ -19,23 +19,26 @@
 
 # What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
 
-def fib(n):
-    if (n==1 or n==2):
-        return 1
-    else:
-        return fib(n-1) + fib(n-2)
+import array as arr
 
+fib= arr.array('L')
+fib.append(1)
+fib.append(1)
+fib.append(1)
 
 g = input("Enter a number: ") 
 
-n = 1
+n = 3
 
-myNumber = fib(n)
+fib.append(fib[n-1] + fib[n-2])
+
+myNumber = fib[n]
 
 while (len(str(myNumber)) < int(g)):
     print(n, " number has Fibonacci of ", myNumber, " and length ", len(str(myNumber)))
     n = n + 1
-    myNumber = fib(n)    
-   
+    fib.append(fib[n-1] + fib[n-2])
+    myNumber = fib[n]   
+
 print ("\n")
 print(n, " is the FIRST number has Fibonacci of ", myNumber, " and length ", len(str(myNumber)))
