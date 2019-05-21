@@ -38,24 +38,31 @@ def isPrime(n):
         i = i + 6
     return True
 
-myList = []
-x = iter.permutations('1487',4)
-for i in x:
-    myNum = int(''.join(i))
-    if isPrime(myNum):
-        myList.append(myNum)
-        print(myNum)
-myList.sort()
-print(myList)
+def validateSequence(myPrime):
+    myList = []
+    x = iter.permutations(str(myPrime),4)
+    for i in x:
+        myNum = int(''.join(i))
+        if isPrime(myNum):
+            myList.append(myNum)
+    myList.sort()
+    #print(myList)
 
-myLength = len(myList)
-myDict = {}
+    myLength = len(myList)
+    myDict = {}
 
-for j in range (1,myLength):
-    for i in range(j,myLength):
-        delta = myList[i]-myList[i-j]
-        strDelta = str(myList[i]) +  " - " + str(myList[i-j])
-        myDict[strDelta] = delta
-        print(myList[i], " - ", myList[i-j], " = ", delta )
-    print("-----------------------------")
-print(myDict)
+    for j in range (1,myLength):
+        for i in range(j,myLength):
+            delta = myList[i]-myList[i-j]
+            check = delta + myList[i]
+            strDelta = str(myList[i]) +  " - " + str(myList[i-j])
+            myDict[strDelta] = delta
+            if check in myList and delta > 0:
+                print(myPrime, " -----> ",myList[i-j],myList[i],check, " ********** ", delta)
+            #else:
+                #print(myList[i], " - ", myList[i-j], " = ", delta)
+        #print("-----------------------------")
+
+for i in range(1000,10001):
+    if (isPrime(i)):
+        validateSequence(i)
